@@ -2,7 +2,7 @@
  * Copyright (c) Microsoft Corporation. All rights reserved.
  * Licensed under the MIT License.
  */
-
+import { Permissions } from '@microsoft/mixed-reality-extension-sdk';
 import * as MRE from '@microsoft/mixed-reality-extension-sdk';
 import dotenv from 'dotenv';
 import { resolve as resolvePath } from 'path';
@@ -23,11 +23,12 @@ function runApp() {
 	// Start listening for connections, and serve static files.
 	const server = new MRE.WebHost({
 		// baseUrl: 'http://<ngrok-id>.ngrok.io',
-		baseDir: resolvePath(__dirname, '../public')
+		baseDir: resolvePath(__dirname, '../public'),
+		permissions: [Permissions.UserInteraction, Permissions.UserTracking]
 	});
 
 	// Handle new application sessions
-	server.adapter.onConnection(context => new App(context));
+	server.adapter.onConnection((context, params) => new App(context, params));
 }
 
 // Check whether code is running in a debuggable watched filesystem

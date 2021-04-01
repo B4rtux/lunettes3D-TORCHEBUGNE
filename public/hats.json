@@ -1,7 +1,227 @@
 {
-    "basketLeft": {
+    "black": {
+        "displayName": "Pick egg",
+        "resourceName": "eggBlack.glb",
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "position": {
+            "x": -0.1,
+            "y": -0.092,
+            "z": 0.07
+        },
+        "attachPoint": "left-hand"
+    },
+    "blue": {
         "displayName": "Pick egg",
         "resourceName": "eggBlue.glb",
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "position": {
+            "x": -0.1,
+            "y": -0.092,
+            "z": 0.07
+        },
+        "attachPoint": "left-hand"
+    },
+    "bronze": {
+        "displayName": "Pick egg",
+        "resourceName": "eggBronze.glb",
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "position": {
+            "x": -0.1,
+            "y": -0.092,
+            "z": 0.07
+        },
+        "attachPoint": "left-hand"
+    },
+    "gold": {
+        "displayName": "Pick egg",
+        "resourceName": "eggGold.glb",
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "position": {
+            "x": -0.1,
+            "y": -0.092,
+            "z": 0.07
+        },
+        "attachPoint": "left-hand"
+    },
+    "green01": {
+        "displayName": "Pick egg",
+        "resourceName": "eggGreen01.glb",
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "position": {
+            "x": -0.1,
+            "y": -0.092,
+            "z": 0.07
+        },
+        "attachPoint": "left-hand"
+    },
+    "green02": {
+        "displayName": "Pick egg",
+        "resourceName": "eggGreen02.glb",
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "position": {
+            "x": -0.1,
+            "y": -0.092,
+            "z": 0.07
+        },
+        "attachPoint": "left-hand"
+    },
+    "orange": {
+        "displayName": "Pick egg",
+        "resourceName": "eggOrange.glb",
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "position": {
+            "x": -0.1,
+            "y": -0.092,
+            "z": 0.07
+        },
+        "attachPoint": "left-hand"
+    },
+    "purple": {
+        "displayName": "Pick egg",
+        "resourceName": "eggPurple.glb",
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "position": {
+            "x": -0.1,
+            "y": -0.092,
+            "z": 0.07
+        },
+        "attachPoint": "left-hand"
+    },
+    "red": {
+        "displayName": "Pick egg",
+        "resourceName": "eggRed.glb",
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "position": {
+            "x": -0.1,
+            "y": -0.092,
+            "z": 0.07
+        },
+        "attachPoint": "left-hand"
+    },
+    "silver": {
+        "displayName": "Pick egg",
+        "resourceName": "eggSilver.glb",
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "position": {
+            "x": -0.1,
+            "y": -0.092,
+            "z": 0.07
+        },
+        "attachPoint": "left-hand"
+    },
+    "white": {
+        "displayName": "Pick egg",
+        "resourceName": "eggWhite.glb",
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "position": {
+            "x": -0.1,
+            "y": -0.092,
+            "z": 0.07
+        },
+        "attachPoint": "left-hand"
+    },
+    "yellow": {
+        "displayName": "Pick egg",
+        "resourceName": "eggYellow.glb",
         "scale": {
             "x": 0.5,
             "y": 0.5,

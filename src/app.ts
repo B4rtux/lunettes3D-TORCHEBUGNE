@@ -50,17 +50,19 @@ export default class WearAHat {
 	private prefabs: { [key: string]: MRE.Prefab } = {};
 	// Container for instantiated hats.
 	private attachedHats = new Map<MRE.Guid, MRE.Actor>();
+	private egg: string;
 
 	/**
 	 * Constructs a new instance of this class.
 	 * @param context The MRE SDK context.
 	 * @param baseUrl The baseUrl to this project's `./public` folder.
 	 */
-	constructor(private context: MRE.Context) {
+	constructor(private context: MRE.Context, private params: MRE.ParameterSet) {
 		this.assets = new MRE.AssetContainer(context);
 		// Hook the context events we're interested in.
 		this.context.onStarted(() => this.started());
 		this.context.onUserLeft(user => this.userLeft(user));
+		this.egg = this.params.egg as string;
 	}
 
 	/**
@@ -126,38 +128,43 @@ export default class WearAHat {
 		// Loop over the hat database, creating a menu item for each entry.
 		for (const hatId of Object.keys(HatDatabase)) {
 			// Create a clickable button.
-			const button = MRE.Actor.Create(this.context, {
-				actor: {
-					parentId: menu.id,
-					name: hatId,
-					appearance: { meshId: buttonMesh.id },
-					collider: { geometry: { shape: MRE.ColliderType.Auto } },
-					transform: {
-						local: { position: { x: 0, y, z: 0 } }
-					}
-				}
-			});
+			if (hatId === this.egg) {
 
-			// Set a click handler on the button.
-			button.setBehavior(MRE.ButtonBehavior)
-				.onClick(user => this.wearHat(hatId, user.id));
-
-			// Create a label for the menu entry.
-			MRE.Actor.Create(this.context, {
-				actor: {
-					parentId: menu.id,
-					name: 'label',
-					text: {
-						contents: HatDatabase[hatId].displayName,
-						height: 0.5,
-						anchor: MRE.TextAnchorLocation.MiddleLeft
-					},
-					transform: {
-						local: { position: { x: 0.5, y, z: 0 } }
+				const button = MRE.Actor.Create(this.context, {
+					actor: {
+						parentId: menu.id,
+						name: hatId,
+						appearance: { meshId: buttonMesh.id },
+						collider: { geometry: { shape: MRE.ColliderType.Auto } },
+						transform: {
+							local: { position: { x: 0, y, z: 0 } }
+						}
 					}
-				}
-			});
-			y = y + 0.5;
+				});
+
+				// Set a click handler on the button.
+				button.setBehavior(MRE.ButtonBehavior)
+					.onClick(user => this.wearHat(hatId, user.id));
+
+				// Create a label for the menu entry.
+				MRE.Actor.Create(this.context, {
+					actor: {
+						parentId: menu.id,
+						name: 'label',
+						text: {
+							contents: HatDatabase[hatId].displayName,
+							height: 0.5,
+							anchor: MRE.TextAnchorLocation.MiddleLeft
+						},
+						transform: {
+							local: { position: { x: 0.5, y, z: 0 } }
+						}
+					}
+				});
+				y = y + 0.5;
+
+			}
+
 		}
 
 		// Create a label for the menu title.
