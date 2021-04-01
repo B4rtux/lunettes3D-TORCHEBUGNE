@@ -1,0 +1,22 @@
+{
+    "basketLeft": {
+        "displayName": "Pick egg",
+        "resourceName": "eggBlue.glb",
+        "scale": {
+            "x": 0.5,
+            "y": 0.5,
+            "z": 0.5
+        },
+        "rotation": {
+            "x": 0,
+            "y": 0,
+            "z": 0
+        },
+        "position": {
+            "x": -0.1,
+            "y": -0.092,
+            "z": 0.07
+        },
+        "attachPoint": "left-hand"
+    }
+}
