@@ -1,242 +1,58 @@
 {
-    "black": {
-        "displayName": "Pick egg",
-        "resourceName": "eggBlack.glb",
-        "scale": {
-            "x": 0.5,
-            "y": 0.5,
-            "z": 0.5
-        },
-        "rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-        },
-        "position": {
-            "x": -0.1,
-            "y": -0.092,
-            "z": 0.07
-        },
-        "attachPoint": "left-hand"
+    "egg01": {
+        "resourceName": "egg01.glb",
+        "position": 0
     },
-    "blue": {
-        "displayName": "Pick egg",
-        "resourceName": "eggBlue.glb",
-        "scale": {
-            "x": 0.5,
-            "y": 0.5,
-            "z": 0.5
-        },
-        "rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-        },
-        "position": {
-            "x": -0.1,
-            "y": -0.092,
-            "z": 0.07
-        },
-        "attachPoint": "left-hand"
+    "egg02": {
+        "resourceName": "egg02.glb",
+        "position": 1
     },
-    "bronze": {
-        "displayName": "Pick egg",
-        "resourceName": "eggBronze.glb",
-        "scale": {
-            "x": 0.5,
-            "y": 0.5,
-            "z": 0.5
-        },
-        "rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-        },
-        "position": {
-            "x": -0.1,
-            "y": -0.092,
-            "z": 0.07
-        },
-        "attachPoint": "left-hand"
+    "egg03": {
+        "resourceName": "egg03.glb",
+        "position": 2
     },
-    "gold": {
-        "displayName": "Pick egg",
-        "resourceName": "eggGold.glb",
-        "scale": {
-            "x": 0.5,
-            "y": 0.5,
-            "z": 0.5
-        },
-        "rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-        },
-        "position": {
-            "x": -0.1,
-            "y": -0.092,
-            "z": 0.07
-        },
-        "attachPoint": "left-hand"
+    "egg04": {
+        "resourceName": "egg04.glb",
+        "position": 3
     },
-    "green01": {
-        "displayName": "Pick egg",
-        "resourceName": "eggGreen01.glb",
-        "scale": {
-            "x": 0.5,
-            "y": 0.5,
-            "z": 0.5
-        },
-        "rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-        },
-        "position": {
-            "x": -0.1,
-            "y": -0.092,
-            "z": 0.07
-        },
-        "attachPoint": "left-hand"
+    "egg05": {
+        "resourceName": "egg05.glb",
+        "position": 4
     },
-    "green02": {
-        "displayName": "Pick egg",
-        "resourceName": "eggGreen02.glb",
-        "scale": {
-            "x": 0.5,
-            "y": 0.5,
-            "z": 0.5
-        },
-        "rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-        },
-        "position": {
-            "x": -0.1,
-            "y": -0.092,
-            "z": 0.07
-        },
-        "attachPoint": "left-hand"
+    "egg06": {
+        "resourceName": "egg06.glb",
+        "position": 5
     },
-    "orange": {
-        "displayName": "Pick egg",
-        "resourceName": "eggOrange.glb",
-        "scale": {
-            "x": 0.5,
-            "y": 0.5,
-            "z": 0.5
-        },
-        "rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-        },
-        "position": {
-            "x": -0.1,
-            "y": -0.092,
-            "z": 0.07
-        },
-        "attachPoint": "left-hand"
+    "egg07": {
+        "resourceName": "egg07.glb",
+        "position": 6
     },
-    "purple": {
-        "displayName": "Pick egg",
-        "resourceName": "eggPurple.glb",
-        "scale": {
-            "x": 0.5,
-            "y": 0.5,
-            "z": 0.5
-        },
-        "rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-        },
-        "position": {
-            "x": -0.1,
-            "y": -0.092,
-            "z": 0.07
-        },
-        "attachPoint": "left-hand"
+    "egg08": {
+        "resourceName": "egg08.glb",
+        "position": 7
     },
-    "red": {
-        "displayName": "Pick egg",
-        "resourceName": "eggRed.glb",
-        "scale": {
-            "x": 0.5,
-            "y": 0.5,
-            "z": 0.5
-        },
-        "rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-        },
-        "position": {
-            "x": -0.1,
-            "y": -0.092,
-            "z": 0.07
-        },
-        "attachPoint": "left-hand"
+    "egg09": {
+        "resourceName": "egg09.glb",
+        "position": 8
     },
-    "silver": {
-        "displayName": "Pick egg",
-        "resourceName": "eggSilver.glb",
-        "scale": {
-            "x": 0.5,
-            "y": 0.5,
-            "z": 0.5
-        },
-        "rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-        },
-        "position": {
-            "x": -0.1,
-            "y": -0.092,
-            "z": 0.07
-        },
-        "attachPoint": "left-hand"
+    "egg10": {
+        "resourceName": "egg10.glb",
+        "position": 9
     },
-    "white": {
-        "displayName": "Pick egg",
-        "resourceName": "eggWhite.glb",
-        "scale": {
-            "x": 0.5,
-            "y": 0.5,
-            "z": 0.5
-        },
-        "rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-        },
-        "position": {
-            "x": -0.1,
-            "y": -0.092,
-            "z": 0.07
-        },
-        "attachPoint": "left-hand"
+    "egg11": {
+        "resourceName": "egg11.glb",
+        "position": 10
     },
-    "yellow": {
-        "displayName": "Pick egg",
-        "resourceName": "eggYellow.glb",
-        "scale": {
-            "x": 0.5,
-            "y": 0.5,
-            "z": 0.5
-        },
-        "rotation": {
-            "x": 0,
-            "y": 0,
-            "z": 0
-        },
-        "position": {
-            "x": -0.1,
-            "y": -0.092,
-            "z": 0.07
-        },
-        "attachPoint": "left-hand"
+    "egg12": {
+        "resourceName": "egg12.glb",
+        "position": 11
+    },
+    "basket": {
+        "resourceName": "basket.glb",
+        "position": 99
+    },
+    "rabbit": {
+        "resourceName": "rabbit.glb",
+        "position": 99
     }
 }

@@ -4,30 +4,13 @@
  */
 
 import * as MRE from '@microsoft/mixed-reality-extension-sdk';
-import { AttachPoint } from '@microsoft/mixed-reality-extension-sdk';
 
 /**
  * The structure of a hat entry in the hat database.
  */
 type HatDescriptor = {
-	displayName: string;
 	resourceName: string;
-	scale: {
-		x: number;
-		y: number;
-		z: number;
-	};
-	rotation: {
-		x: number;
-		y: number;
-		z: number;
-	};
-	position: {
-		x: number;
-		y: number;
-		z: number;
-	};
-	attachPoint: AttachPoint;
+	position: number;
 };
 
 /**
@@ -58,11 +41,12 @@ export default class WearAHat {
 	 * @param baseUrl The baseUrl to this project's `./public` folder.
 	 */
 	constructor(private context: MRE.Context, private params: MRE.ParameterSet) {
+		this.egg = this.params.egg as string;
 		this.assets = new MRE.AssetContainer(context);
 		// Hook the context events we're interested in.
 		this.context.onStarted(() => this.started());
 		this.context.onUserLeft(user => this.userLeft(user));
-		this.egg = this.params.egg as string;
+		this.context.onUserJoined(user => this.userJoin(user));
 	}
 
 	/**
@@ -114,75 +98,131 @@ export default class WearAHat {
 		this.removeHats(user);
 	}
 
+
+	private userJoin(user: MRE.User) {
+		const userId = user.id;
+		if (this.egg === "basket") {
+			this.assets.loadGltf("basket.glb")
+				.then(assets => {
+					this.prefabs[this.egg] = assets.find(a => a.prefab !== null) as MRE.Prefab;
+					this.attachedHats.set(userId, MRE.Actor.CreateFromPrefab(this.context, {
+						prefab: this.prefabs[this.egg],
+						actor: {
+							transform: {
+								local: {
+									position: {
+										x: -0.1,
+										y: -0.092,
+										z: 0.07
+									},
+									scale: {
+										x: 0.5,
+										y: 0.5,
+										z: 0.5
+									}
+								}
+							},
+							attachment: {
+								attachPoint: "left-hand",
+								userId
+							}
+						}
+					}));
+				})
+				.catch(e => MRE.log.error("app", e));
+		}
+		if (this.egg === "rabbit") {
+			this.assets.loadGltf("rabbit.glb")
+				.then(assets => {
+					this.prefabs[this.egg] = assets.find(a => a.prefab !== null) as MRE.Prefab;
+					this.attachedHats.set(userId, MRE.Actor.CreateFromPrefab(this.context, {
+						prefab: this.prefabs[this.egg],
+						actor: {
+							transform: {
+								local: {
+									position: {
+										x: -0.08,
+										y: -0.04,
+										z: 0
+									},
+									scale: {
+										x: 0.45,
+										y: 0.45,
+										z: 0.45
+									}
+								}
+							},
+							attachment: {
+								attachPoint: "head",
+								userId
+							}
+						}
+					}));
+				})
+				.catch(e => MRE.log.error("app", e));
+		}
+
+	}
+
 	/**
 	 * Show a menu of hat selections.
 	 */
 	private showHatMenu() {
-		// Create a parent object for all the menu items.
-		const menu = MRE.Actor.Create(this.context, {});
-		let y = 0.3;
 
 		// Create menu button
-		const buttonMesh = this.assets.createBoxMesh('button', 0.3, 0.3, 0.01);
+		this.assets = new MRE.AssetContainer(this.context);
+		const buttonMesh = this.assets.createBoxMesh('button', 0.3, 0.3, 0.3);
+		const buttonMaterial = this.assets.createMaterial(
+			"mat",
+			{
+				color:
+					{ r: 100, g: 0, b: 0, a: 0 },
+				alphaMode: MRE.AlphaMode.Blend,
+				alphaCutoff: 1
+			}
+		);
 
 		// Loop over the hat database, creating a menu item for each entry.
 		for (const hatId of Object.keys(HatDatabase)) {
 			// Create a clickable button.
-			if (hatId === this.egg) {
+			if (hatId === this.egg && hatId !== "basket" && hatId !== "rabbit") {
 
-				const button = MRE.Actor.Create(this.context, {
+				MRE.Actor.CreateFromPrefab(this.context, {
+					prefab: this.prefabs[hatId],
 					actor: {
-						parentId: menu.id,
-						name: hatId,
-						appearance: { meshId: buttonMesh.id },
-						collider: { geometry: { shape: MRE.ColliderType.Auto } },
 						transform: {
-							local: { position: { x: 0, y, z: 0 } }
-						}
+							local: {
+								position: {
+									x: 0,
+									y: -0.5,
+									z: 0
+								},
+							}
+						},
+
+					}
+				})
+
+				const button = MRE.Actor.CreatePrimitive(this.assets, {
+					definition: {
+						shape: MRE.PrimitiveShape.Box
+					},
+					actor: {
+						name: "Button",
+						appearance: { meshId: buttonMesh.id, materialId: buttonMaterial.id },
+						collider: { geometry: { shape: MRE.ColliderType.Auto } },
 					}
 				});
+
 
 				// Set a click handler on the button.
 				button.setBehavior(MRE.ButtonBehavior)
 					.onClick(user => this.wearHat(hatId, user.id));
 
-				// Create a label for the menu entry.
-				MRE.Actor.Create(this.context, {
-					actor: {
-						parentId: menu.id,
-						name: 'label',
-						text: {
-							contents: HatDatabase[hatId].displayName,
-							height: 0.5,
-							anchor: MRE.TextAnchorLocation.MiddleLeft
-						},
-						transform: {
-							local: { position: { x: 0.5, y, z: 0 } }
-						}
-					}
-				});
-				y = y + 0.5;
-
 			}
 
 		}
 
-		// Create a label for the menu title.
-		MRE.Actor.Create(this.context, {
-			actor: {
-				parentId: menu.id,
-				name: 'label',
-				text: {
-					contents: ''.padStart(8, ' '),
-					height: 0.8,
-					anchor: MRE.TextAnchorLocation.MiddleCenter,
-					color: MRE.Color3.Yellow()
-				},
-				transform: {
-					local: { position: { x: 0.5, y: y + 0.25, z: 0 } }
-				}
-			}
-		});
 	}
 
 	/**
@@ -223,23 +263,30 @@ export default class WearAHat {
 		if (!hatRecord.resourceName) {
 			return;
 		}
+		const xPosition = (hatRecord.position % 3) - 1;
+		const zPosition = Math.floor(hatRecord.position / 3);
+		const position = {
+			x: (xPosition * 0.075) + 0.026,
+			y: -0.3,
+			z: (zPosition * 0.075) - 0.04
+		};
 
-		// Create the hat model and attach it to the avatar's head.
+		// EGG
 		this.attachedHats.set(userId, MRE.Actor.CreateFromPrefab(this.context, {
 			prefab: this.prefabs[hatId],
 			actor: {
 				transform: {
 					local: {
-						position: hatRecord.position,
-						rotation: MRE.Quaternion.FromEulerAngles(
-							hatRecord.rotation.x * MRE.DegreesToRadians,
-							hatRecord.rotation.y * MRE.DegreesToRadians,
-							hatRecord.rotation.z * MRE.DegreesToRadians),
-						scale: hatRecord.scale,
+						position: position,
+						scale: {
+							x: 0.08,
+							y: 0.08,
+							z: 0.08,
+						}
 					}
 				},
 				attachment: {
-					attachPoint: hatRecord.attachPoint,
+					attachPoint: "left-hand",
 					userId
 				}
 			}
