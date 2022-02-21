@@ -218,6 +218,11 @@ export default class WearAHat {
 						collider: { geometry: { shape: MRE.ColliderType.Auto } },
 						transform: {
 							local: {
+								position: {
+									x: 0,
+									y: -0.5,
+									z: 0
+								},
 								scale: {
 									x: 0.3,
 									y: 0.5,
