@@ -171,12 +171,12 @@ export default class WearAHat {
 
 		// Create menu button
 		this.assets = new MRE.AssetContainer(this.context);
-		const buttonMesh = this.assets.createBoxMesh('button', 0.3, 0.3, 0.3);
+		const buttonMesh = this.assets.createBoxMesh('button', 0.2, 0.2, 0.2);
 		const buttonMaterial = this.assets.createMaterial(
 			"mat",
 			{
 				color:
-					{ r: 100, g: 0, b: 0, a: 0 },
+					{ r: 100, g: 0, b: 0, a: 0.5 },
 				alphaMode: MRE.AlphaMode.Blend,
 				alphaCutoff: 1
 			}
@@ -198,9 +198,9 @@ export default class WearAHat {
 									z: 0
 								},
 								scale: {
-									x: 0.2,
-									y: 0.2,
-									z: 0.2
+									x: 0.4,
+									y: 0.4,
+									z: 0.4
 								}
 							}
 						},
@@ -272,7 +272,7 @@ export default class WearAHat {
 		const zPosition = Math.floor(hatRecord.position / 3);
 		const position = {
 			x: (xPosition * 0.075) + 0.026,
-			y: -0.4,
+			y: -0.35,
 			z: (zPosition * 0.075) - 0.04
 		};
 
