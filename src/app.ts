@@ -141,7 +141,7 @@ export default class WearAHat {
 							transform: {
 								local: {
 									position: {
-										x: -0.1,
+										x: -0.12,
 										y: -0.04,
 										z: 0
 									},
