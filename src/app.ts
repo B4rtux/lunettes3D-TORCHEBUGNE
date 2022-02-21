@@ -197,6 +197,11 @@ export default class WearAHat {
 									y: -0.5,
 									z: 0
 								},
+								scale: {
+									x: 0.2,
+									y: 0.2,
+									z: 0.2
+								}
 							}
 						},
 
@@ -267,7 +272,7 @@ export default class WearAHat {
 		const zPosition = Math.floor(hatRecord.position / 3);
 		const position = {
 			x: (xPosition * 0.075) + 0.026,
-			y: -0.3,
+			y: -0.4,
 			z: (zPosition * 0.075) - 0.04
 		};
 
