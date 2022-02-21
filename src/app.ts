@@ -193,7 +193,7 @@ export default class WearAHat {
 						transform: {
 							local: {
 								position: {
-									x: 0.2,
+									x: 0,
 									y: -0.5,
 									z: 0
 								},
@@ -285,7 +285,7 @@ export default class WearAHat {
 		const xPosition = (hatRecord.position % 3) - 1;
 		const zPosition = Math.floor(hatRecord.position / 3);
 		const position = {
-			x: (xPosition * 0.075) + 0.026,
+			x: (xPosition * 0.075) + 0.03,
 			y: -0.35,
 			z: (zPosition * 0.075) - 0.04
 		};
