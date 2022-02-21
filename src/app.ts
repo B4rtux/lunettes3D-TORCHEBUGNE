@@ -220,7 +220,7 @@ export default class WearAHat {
 							local: {
 								position: {
 									x: 0,
-									y: -0.5,
+									y: -0.25,
 									z: 0
 								},
 								scale: {
