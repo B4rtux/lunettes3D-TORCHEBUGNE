@@ -226,42 +226,41 @@ export default class WearAHat {
 							}
 						}
 					}
-				}
 				});
 
 
-			// Set a click handler on the button.
-			button.setBehavior(MRE.ButtonBehavior)
-				.onClick(user => this.wearHat(hatId, user.id));
+				// Set a click handler on the button.
+				button.setBehavior(MRE.ButtonBehavior)
+					.onClick(user => this.wearHat(hatId, user.id));
+
+			}
 
 		}
 
 	}
 
-}
-
 	/**
 	 * Preload all hat resources. This makes instantiating them faster and more efficient.
 	 */
 	private preloadHats() {
-	// Loop over the hat database, preloading each hat resource.
-	// Return a promise of all the in-progress load promises. This
-	// allows the caller to wait until all hats are done preloading
-	// before continuing.
-	return Promise.all(
-		Object.keys(HatDatabase).map(hatId => {
-			const hatRecord = HatDatabase[hatId];
-			if (hatRecord.resourceName) {
-				return this.assets.loadGltf(hatRecord.resourceName)
-					.then(assets => {
-						this.prefabs[hatId] = assets.find(a => a.prefab !== null) as MRE.Prefab;
-					})
-					.catch(e => MRE.log.error("app", e));
-			} else {
-				return Promise.resolve();
-			}
-		}));
-}
+		// Loop over the hat database, preloading each hat resource.
+		// Return a promise of all the in-progress load promises. This
+		// allows the caller to wait until all hats are done preloading
+		// before continuing.
+		return Promise.all(
+			Object.keys(HatDatabase).map(hatId => {
+				const hatRecord = HatDatabase[hatId];
+				if (hatRecord.resourceName) {
+					return this.assets.loadGltf(hatRecord.resourceName)
+						.then(assets => {
+							this.prefabs[hatId] = assets.find(a => a.prefab !== null) as MRE.Prefab;
+						})
+						.catch(e => MRE.log.error("app", e));
+				} else {
+					return Promise.resolve();
+				}
+			}));
+	}
 
 	/**
 	 * Instantiate a hat and attach it to the avatar's head.
@@ -269,47 +268,47 @@ export default class WearAHat {
 	 * @param userId The id of the user we will attach the hat to.
 	 */
 	private wearHat(hatId: string, userId: MRE.Guid) {
-	// If the user is wearing a hat, destroy it.
-	this.removeHats(this.context.user(userId));
+		// If the user is wearing a hat, destroy it.
+		this.removeHats(this.context.user(userId));
 
-	const hatRecord = HatDatabase[hatId];
+		const hatRecord = HatDatabase[hatId];
 
-	// If the user selected 'none', then early out.
-	if (!hatRecord.resourceName) {
-		return;
-	}
-	const xPosition = (hatRecord.position % 3) - 1;
-	const zPosition = Math.floor(hatRecord.position / 3);
-	const position = {
-		x: (xPosition * 0.075) + 0.026,
-		y: -0.35,
-		z: (zPosition * 0.075) - 0.04
-	};
-
-	// EGG
-	this.attachedHats.set(userId, MRE.Actor.CreateFromPrefab(this.context, {
-		prefab: this.prefabs[hatId],
-		actor: {
-			transform: {
-				local: {
-					position: position,
-					scale: {
-						x: 0.08,
-						y: 0.08,
-						z: 0.08,
-					}
-				}
-			},
-			attachment: {
-				attachPoint: "left-hand",
-				userId
-			}
+		// If the user selected 'none', then early out.
+		if (!hatRecord.resourceName) {
+			return;
 		}
-	}));
-}
+		const xPosition = (hatRecord.position % 3) - 1;
+		const zPosition = Math.floor(hatRecord.position / 3);
+		const position = {
+			x: (xPosition * 0.075) + 0.026,
+			y: -0.35,
+			z: (zPosition * 0.075) - 0.04
+		};
+
+		// EGG
+		this.attachedHats.set(userId, MRE.Actor.CreateFromPrefab(this.context, {
+			prefab: this.prefabs[hatId],
+			actor: {
+				transform: {
+					local: {
+						position: position,
+						scale: {
+							x: 0.08,
+							y: 0.08,
+							z: 0.08,
+						}
+					}
+				},
+				attachment: {
+					attachPoint: "left-hand",
+					userId
+				}
+			}
+		}));
+	}
 
 	private removeHats(user: MRE.User) {
-	if (this.attachedHats.has(user.id)) { this.attachedHats.get(user.id).destroy(); }
-	this.attachedHats.delete(user.id);
-}
+		if (this.attachedHats.has(user.id)) { this.attachedHats.get(user.id).destroy(); }
+		this.attachedHats.delete(user.id);
+	}
 }
