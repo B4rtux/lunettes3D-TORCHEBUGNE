@@ -111,7 +111,7 @@ export default class WearAHat {
 							transform: {
 								local: {
 									position: {
-										x: -0.1,
+										x: -0.05,
 										y: -0.092,
 										z: 0.07
 									},
@@ -176,7 +176,7 @@ export default class WearAHat {
 			"mat",
 			{
 				color:
-					{ r: 100, g: 0, b: 0, a: 0.5 },
+					{ r: 100, g: 0, b: 0, a: 0 },
 				alphaMode: MRE.AlphaMode.Blend,
 				alphaCutoff: 1
 			}
