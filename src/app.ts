@@ -171,7 +171,7 @@ export default class WearAHat {
 
 		// Create menu button
 		this.assets = new MRE.AssetContainer(this.context);
-		const buttonMesh = this.assets.createBoxMesh('button', 0.2, 0.2, 0.2);
+		const buttonMesh = this.assets.createBoxMesh('button', 0.025, 0.05, 0.025);
 		const buttonMaterial = this.assets.createMaterial(
 			"mat",
 			{
