@@ -131,35 +131,6 @@ export default class WearAHat {
 				})
 				.catch(e => MRE.log.error("app", e));
 
-				// belle merde 
-				this.assets.loadGltf("rabbit.glb")
-				.then(assets => {
-					this.prefabs[this.egg] = assets.find(a => a.prefab !== null) as MRE.Prefab;
-					this.attachedHats.set(userId, MRE.Actor.CreateFromPrefab(this.context, {
-						prefab: this.prefabs[this.egg],
-						actor: {
-							transform: {
-								local: {
-									position: {
-										x: 0,
-										y:-0.15,
-										z: 0
-									},
-									scale: {
-										x: 1,
-										y: 1,
-										z: -1									}
-								}
-							},
-							attachment: {
-								attachPoint: "spine-top",
-								userId
-							}
-						}
-					}));
-				})
-				.catch(e => MRE.log.error("app", e));
-				// fin de la belle merde
 		}
 		if (this.egg === "rabbit") {
 			this.assets.loadGltf("rabbit.glb")
