@@ -1,3 +1,7 @@
+"scripts": {
+   "start": "node index.js"
+}
+
 {
   "name": "wear-a-hat",
   "version": "0.1.0",
