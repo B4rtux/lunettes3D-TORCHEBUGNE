@@ -129,7 +129,7 @@ export default class WearAHat {
 						}
 					}));
 				})
-				.catch(e => MRE.log.error("app", e));
+				.catch(e => console.log.error("app", e));
 
 		}
 		if (this.egg === "rabbit") {
@@ -160,7 +160,7 @@ export default class WearAHat {
 						}
 					}));
 				})
-				.catch(e => MRE.log.error("app", e));
+				.catch(e => console.log.error("app", e));
 		}
 
 	}
