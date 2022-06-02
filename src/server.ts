@@ -28,7 +28,7 @@ function runApp() {
 	});
 
 	// Handle new application sessions
-	server.adapter.onConnection((context, params) => new App(context, params, server.baseUrl));
+	server.adapter.onConnection((context, params) => new App(context, params));
 }
 
 // Check whether code is running in a debuggable watched filesystem
@@ -37,7 +37,7 @@ function runApp() {
 // The delay value below is in milliseconds so 1000 is a one second delay.
 // You may need to increase the delay or be able to decrease it depending
 // on the speed of your machine.
-const delay = 1000;
+const delay = 5000;
 const argv = process.execArgv.join();
 const isDebug = argv.includes('inspect') || argv.includes('debug');
 
