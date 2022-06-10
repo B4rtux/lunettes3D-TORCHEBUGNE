@@ -33,7 +33,7 @@ export default class WearAHat {
 	private prefabs: { [key: string]: MRE.Prefab } = {};
 	// Container for instantiated hats.
 	private attachedHats = new Map<MRE.Guid, MRE.Actor>();
-	private egg: string;
+	private choix: string;
 
 	/**
 	 * Constructs a new instance of this class.
@@ -41,7 +41,7 @@ export default class WearAHat {
 	 * @param baseUrl The baseUrl to this project's `./public` folder.
 	 */
 	constructor(private context: MRE.Context, private params: MRE.ParameterSet) {
-		this.egg = this.params.egg as string;
+		this.choix = this.params.choix as string;
 		this.assets = new MRE.AssetContainer(context);
 		// Hook the context events we're interested in.
 		this.context.onStarted(() => this.started());
@@ -100,13 +100,33 @@ export default class WearAHat {
 
 
 	private userJoin(user: MRE.User) {
+		const hatMesh = this.assets.createBoxMesh('hatm', 0.2, 0.2, 0.2);
+		const hatMaterial = this.assets.createMaterial(
+			"mathat",
+			{
+				color:
+					{ r: 100, g: 0, b: 0, a: 0 },
+				alphaMode: MRE.AlphaMode.Blend,
+				alphaCutoff: 1
+			}
+		);
+		const headMesh = this.assets.createBoxMesh('headm', 0.7, 0.7, 0.7);
+		const headMaterial = this.assets.createMaterial(
+			"mathead",
+			{
+				color:
+					{ r: 100, g: 0, b: 0, a: 0 },
+				alphaMode: MRE.AlphaMode.Blend,
+				alphaCutoff: 1
+			}
+		);
 		const userId = user.id;
-		if (this.egg === "basket") {
-			this.assets.loadGltf("basket.glb")
+		if (this.choix === "lunettes") {
+			this.assets.loadGltf("lunettes.glb")
 				.then(assets => {
-					this.prefabs[this.egg] = assets.find(a => a.prefab !== null) as MRE.Prefab;
+					this.prefabs[this.choix] = assets.find(a => a.prefab !== null) as MRE.Prefab;
 					this.attachedHats.set(userId, MRE.Actor.CreateFromPrefab(this.context, {
-						prefab: this.prefabs[this.egg],
+						prefab: this.prefabs[this.choix],
 						actor: {
 							transform: {
 								local: {
@@ -132,24 +152,26 @@ export default class WearAHat {
 
 
 		}
-		if (this.egg === "rabbit") {
-			this.assets.loadGltf("rabbit.glb")
+		if (this.choix === "door") {
+			this.assets.loadGltf("door_collider.glb")
 				.then(assets => {
-					this.prefabs[this.egg] = assets.find(a => a.prefab !== null) as MRE.Prefab;
+					this.prefabs[this.choix] = assets.find(a => a.prefab !== null) as MRE.Prefab;
 					this.attachedHats.set(userId, MRE.Actor.CreateFromPrefab(this.context, {
-						prefab: this.prefabs[this.egg],
+						prefab: this.prefabs[this.choix],
 						actor: {
+							appearance: { meshId: headMesh.id, materialId: headMaterial.id },
+						collider: { geometry: { shape: MRE.ColliderType.Auto } },
 							transform: {
 								local: {
 									position: {
-										x: -0.08,
-										y: -0.04,
-										z: 0
+										x: 0,
+										y: 0.04,
+										z: 0.035
 									},
 									scale: {
-										x: 0.45,
-										y: 0.45,
-										z: 0.45
+										x: 1,
+										y: 1,
+										z: 0.8
 									}
 								}
 							},
@@ -161,6 +183,65 @@ export default class WearAHat {
 					}));
 				})
 
+		
+		this.assets.loadGltf("door_collider.glb")
+				.then(assets => {
+					this.prefabs[this.choix] = assets.find(a => a.prefab !== null) as MRE.Prefab;
+					this.attachedHats.set(userId, MRE.Actor.CreateFromPrefab(this.context, {
+						prefab: this.prefabs[this.choix],
+						actor: {
+							appearance: { meshId: hatMesh.id, materialId: hatMaterial.id },
+						collider: { geometry: { shape: MRE.ColliderType.Auto } },
+							transform: {
+								local: {
+									position: {
+										x: 0,
+										y: 0.04,
+										z: 0.035
+									},
+									scale: {
+										x: 1,
+										y: 1,
+										z: 1
+									}
+								}
+							},
+							attachment: {
+								attachPoint: "left-hand",
+								userId
+							}
+						}
+					}));
+				})
+				this.assets.loadGltf("door_collider.glb")
+				.then(assets => {
+					this.prefabs[this.choix] = assets.find(a => a.prefab !== null) as MRE.Prefab;
+					this.attachedHats.set(userId, MRE.Actor.CreateFromPrefab(this.context, {
+						prefab: this.prefabs[this.choix],
+						actor: {
+							appearance: { meshId: hatMesh.id, materialId: hatMaterial.id },
+						collider: { geometry: { shape: MRE.ColliderType.Auto } },
+							transform: {
+								local: {
+									position: {
+										x: 0,
+										y: 0.04,
+										z: 0.035
+									},
+									scale: {
+										x: 1,
+										y: 1,
+										z: 1
+									}
+								}
+							},
+							attachment: {
+								attachPoint: "right-hand",
+								userId
+							}
+						}
+					}));
+				})
 		}
 
 	}
@@ -186,7 +267,7 @@ export default class WearAHat {
 		// Loop over the hat database, creating a menu item for each entry.
 		for (const hatId of Object.keys(HatDatabase)) {
 			// Create a clickable button.
-			if (hatId === this.egg && hatId !== "basket" && hatId !== "rabbit") {
+			if (hatId === this.choix && hatId !== "lunettes" && hatId !== "door") {
 
 				MRE.Actor.CreateFromPrefab(this.context, {
 					prefab: this.prefabs[hatId],
@@ -291,7 +372,7 @@ export default class WearAHat {
 			z: (zPosition * 0.075) - 0.04
 		};
 
-		// EGG
+		// choix
 		this.attachedHats.set(userId, MRE.Actor.CreateFromPrefab(this.context, {
 			prefab: this.prefabs[hatId],
 			actor: {
